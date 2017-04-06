@@ -2,18 +2,16 @@ package xlash.pi.graphics.gui;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Rectangle;
 
 import xlash.pi.Game;
 
 public abstract class Gui {
 	
-	public int x,y,width,height;
+	public Rectangle bounds;
 	
 	public Gui(int x, int y, int width, int height){
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+		this.bounds = new Rectangle(x,y,width,height);
 	}
 	
 	public Gui(){
@@ -37,6 +35,30 @@ public abstract class Gui {
 	 * Runs every click.
 	 * @param point Relative to the gui's position.
 	 */
-	public void onClick(Point point){}
+	public void onClick(Point point, int button, boolean pressed){}
+	
+	public int getX(){
+		return bounds.x;
+	}
+	
+	public int getY(){
+		return bounds.y;
+	}
+	
+	public int getWidth(){
+		return bounds.width;
+	}
+	
+	public int getHeight(){
+		return bounds.height;
+	}
+	
+	public void setPosition(int x, int y, int width, int height){
+		bounds.setBounds(x, y, width, height);
+	}
+	
+	public void setPosition(int x, int y){
+		this.setPosition(x, y, getWidth(), getHeight());
+	}
 
 }
